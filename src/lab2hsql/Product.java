@@ -91,9 +91,9 @@ public class Product {
         return true;
     }
 
-    public static PreparedStatement getSelectQuery(Connection conn) {
+    public static PreparedStatement getSelectQuery(Connection conn) throws IOException {
         String sqlName = "getAllProductInfo";
-        PreparedStatement pst = LAB2HSQL.hmp.get(sqlName);
+        PreparedStatement pst = Lab2HSQL.hmp.get(sqlName);
         if (pst != null) {
             return pst;
         }
@@ -104,11 +104,11 @@ public class Product {
         } catch (SQLException ex) {
             System.out.println("Ошибка получения PreparedStatement...." + ex.getMessage());
         }
-        LAB2HSQL.hsps.put(sqlName, pst);
+        Lab2HSQL.hmp.put(sqlName, pst);
         return null;
     }
 
-    private static String readQuery(String aqlName) throws IOException {
+    private static String readQuery(String sqlName) throws IOException {
         String sql;
         StringBuilder sb = new StringBuilder();
         try (InputStream is
